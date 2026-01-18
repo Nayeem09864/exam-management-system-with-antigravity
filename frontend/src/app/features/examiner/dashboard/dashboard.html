@@ -1,0 +1,75 @@
+<div class="space-y-8">
+    <div class="flex justify-between items-center">
+        <div>
+            <h2 class="text-3xl font-bold text-gray-800">Overview</h2>
+            <p class="text-gray-500">Welcome back, Examiner</p>
+        </div>
+        <a routerLink="/exams/create"
+            class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-6 rounded-xl shadow-lg shadow-indigo-200 transition-all flex items-center space-x-2">
+            <span class="text-xl">+</span>
+            <span>Create New Exam</span>
+        </a>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div *ngFor="let stat of stats"
+            class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center space-x-4">
+            <div [class]="'w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl ' + stat.color">
+                {{ stat.icon }}
+            </div>
+            <div>
+                <p class="text-gray-500 text-sm font-medium">{{ stat.label }}</p>
+                <h3 class="text-2xl font-bold text-gray-800">{{ stat.value }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Exams -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="p-6 border-b border-gray-50 flex justify-between items-center">
+            <h3 class="text-xl font-bold text-gray-800">Recent Exams</h3>
+            <button class="text-indigo-600 hover:text-indigo-700 text-sm font-medium">View All</button>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider">
+                    <tr>
+                        <th class="px-6 py-4 font-medium">Exam Title</th>
+                        <th class="px-6 py-4 font-medium">Duration</th>
+                        <th class="px-6 py-4 font-medium">Questions</th>
+                        <th class="px-6 py-4 font-medium">Total Marks</th>
+                        <th class="px-6 py-4 font-medium">Status</th>
+                        <th class="px-6 py-4 font-medium text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-50">
+                    <tr *ngFor="let exam of exams" class="hover:bg-gray-50 transition-colors">
+                        <td class="px-6 py-4">
+                            <p class="font-medium text-gray-800">{{ exam.title }}</p>
+                            <p class="text-xs text-gray-400">Created today</p>
+                        </td>
+                        <td class="px-6 py-4 text-gray-600">{{ exam.durationMinutes }} mins</td>
+                        <td class="px-6 py-4 text-gray-600">{{ exam.questions?.length || 0 }}</td>
+                        <td class="px-6 py-4 text-gray-600">{{ exam.totalMarks }}</td>
+                        <td class="px-6 py-4">
+                            <span [class]="exam.isActive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'"
+                                class="px-3 py-1 rounded-full text-xs font-medium">
+                                {{ exam.isActive ? 'Active' : 'Draft' }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <button class="text-gray-400 hover:text-indigo-600 transition-colors">Edit</button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="exams.length === 0">
+                        <td colspan="6" class="px-6 py-8 text-center text-gray-500">
+                            No exams found. Create your first exam!
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
