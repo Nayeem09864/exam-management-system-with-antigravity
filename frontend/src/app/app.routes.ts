@@ -18,6 +18,7 @@ export const routes: Routes = [
         children: [
             { path: 'dashboard', component: DashboardComponent }, // Examiner
             { path: 'exams/create', component: ExamCreateComponent }, // Examiner
+            { path: 'questions/create', loadComponent: () => import('./features/examiner/question-create/question-create').then(m => m.QuestionCreateComponent) }, // Examiner
             { path: 'candidate/exams', component: ExamListComponent }, // Candidate
             { path: 'candidate/exam/:id', component: TakeExamComponent }, // Candidate
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
