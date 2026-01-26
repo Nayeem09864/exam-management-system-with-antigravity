@@ -20,6 +20,8 @@ export class QuestionCreateComponent {
         content: ['', Validators.required],
         options: this.fb.array([
             this.fb.control('', Validators.required),
+            this.fb.control('', Validators.required),
+            this.fb.control('', Validators.required),
             this.fb.control('', Validators.required)
         ]),
         correctOption: ['', Validators.required],
@@ -55,17 +57,19 @@ export class QuestionCreateComponent {
                     this.successMessage = 'Question added successfully!';
                     this.questionForm.reset({
                         content: '',
-                        options: ['', ''],
+                        options: ['', '', '', ''],
                         correctOption: '',
                         category: '',
                         difficulty: 'MEDIUM'
                     });
-                    // Re-initialize options array to have 2 empty controls
-                    while (this.options.length > 2) {
+                    // Re-initialize options array to have 4 empty controls
+                    while (this.options.length > 4) {
                         this.options.removeAt(0);
                     }
-                    this.options.controls[0].setValue('');
-                    this.options.controls[1].setValue('');
+                    while (this.options.length < 4) {
+                        this.options.push(this.fb.control('', Validators.required));
+                    }
+                    this.options.controls.forEach(ctrl => ctrl.setValue(''));
 
                 },
                 error: (err: any) => {
