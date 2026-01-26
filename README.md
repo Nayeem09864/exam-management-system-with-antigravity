@@ -2,7 +2,7 @@
 
 A comprehensive web-based Exam Management System designed to facilitate the creation, management, and execution of online MCQ examinations. This system provides distinct portals for Examiners and Candidates, allowing for efficient exam administration and fair assessment.
 
-## 🚀 Features
+## 🚀 Featuresc
 
 ### for Examiners
 - **Dashboard**: Overview of exams and candidates.
@@ -24,7 +24,7 @@ A comprehensive web-based Exam Management System designed to facilitate the crea
 ## 🛠 Technology Stack
 
 ### Backend
-- **Language**: Java 17
+- **Language**: Java 21
 - **Framework**: Spring Boot 3.2.0
 - **Security**: Spring Security, JWT (Base64 encoded tokens)
 - **Database**: MySQL (Production), H2 (Test/Dev)
@@ -41,7 +41,7 @@ A comprehensive web-based Exam Management System designed to facilitate the crea
 ## 📋 Prerequisites
 
 Before running the application, ensure you have the following installed:
-- **Java Development Kit (JDK) 17**
+- **Java Development Kit (JDK) 21**
 - **Node.js** (Latest LTS recommended)
 - **Maven**
 - **MySQL Server**
