@@ -55,7 +55,7 @@ public class ExamService {
     public Exam generateRandomQuestions(Long examId, int count, String category) {
         Exam exam = getExamById(examId);
         List<Question> allQuestions = questionRepository.findAll();
-        
+
         // Filter by category if provided
         if (category != null && !category.isEmpty()) {
             allQuestions = allQuestions.stream()
@@ -65,14 +65,26 @@ public class ExamService {
 
         Collections.shuffle(allQuestions);
         List<Question> selected = allQuestions.stream().limit(count).collect(Collectors.toList());
-        
+
         exam.getQuestions().addAll(selected);
         return examRepository.save(exam);
     }
-    
+
     public Exam updateExamStatus(Long id, boolean isActive) {
         Exam exam = getExamById(id);
         exam.setIsActive(isActive);
+        return examRepository.save(exam);
+    }
+
+    @Transactional
+    public Exam updateExam(Long id, Exam updatedExam) {
+        Exam exam = getExamById(id);
+        exam.setTitle(updatedExam.getTitle());
+        exam.setDescription(updatedExam.getDescription());
+        exam.setDurationMinutes(updatedExam.getDurationMinutes());
+        exam.setTotalMarks(updatedExam.getTotalMarks());
+        exam.setPassingMarks(updatedExam.getPassingMarks());
+        exam.setIsActive(updatedExam.getIsActive());
         return examRepository.save(exam);
     }
 

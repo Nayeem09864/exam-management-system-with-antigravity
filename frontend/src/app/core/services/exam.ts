@@ -14,6 +14,14 @@ export class ExamService {
     return this.http.post(this.apiUrl, examData);
   }
 
+  getExamById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
+  updateExam(id: number, examData: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, examData);
+  }
+
   getAllExams(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }

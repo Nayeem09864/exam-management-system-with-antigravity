@@ -36,7 +36,7 @@ public class ExamController {
     public ResponseEntity<Exam> getExamByCode(@PathVariable String code) {
         return ResponseEntity.ok(service.getExamByAccessCode(code));
     }
-    
+
     @GetMapping("/active")
     public ResponseEntity<List<Exam>> getActiveExams() {
         return ResponseEntity.ok(service.getAllExams().stream()
@@ -44,25 +44,29 @@ public class ExamController {
                 .toList());
     }
 
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('EXAMINER')")
+    public ResponseEntity<Exam> updateExam(@PathVariable Long id, @RequestBody Exam exam) {
+        return ResponseEntity.ok(service.updateExam(id, exam));
+    }
+
     @PostMapping("/{id}/questions")
     @PreAuthorize("hasAuthority('EXAMINER')")
     public ResponseEntity<Exam> addQuestions(
-        @PathVariable Long id, 
-        @RequestBody List<Long> questionIds
-    ) {
+            @PathVariable Long id,
+            @RequestBody List<Long> questionIds) {
         return ResponseEntity.ok(service.addQuestionsToExam(id, questionIds));
     }
-    
+
     @PostMapping("/{id}/generate-questions")
     @PreAuthorize("hasAuthority('EXAMINER')")
     public ResponseEntity<Exam> generateQuestions(
-        @PathVariable Long id,
-        @RequestParam int count,
-        @RequestParam(required = false) String category
-    ) {
+            @PathVariable Long id,
+            @RequestParam int count,
+            @RequestParam(required = false) String category) {
         return ResponseEntity.ok(service.generateRandomQuestions(id, count, category));
     }
-    
+
     @PatchMapping("/{id}/status")
     @PreAuthorize("hasAuthority('EXAMINER')")
     public ResponseEntity<Exam> updateStatus(@PathVariable Long id, @RequestParam boolean isActive) {

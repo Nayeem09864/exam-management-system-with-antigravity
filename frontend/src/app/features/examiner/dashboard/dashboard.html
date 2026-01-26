@@ -60,7 +60,8 @@
                             </span>
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <button class="text-gray-400 hover:text-indigo-600 transition-colors">Edit</button>
+                            <a [routerLink]="['/exams/edit', exam.id]"
+                                class="text-gray-400 hover:text-indigo-600 transition-colors cursor-pointer">Edit</a>
                         </td>
                     </tr>
                     <tr *ngIf="exams.length === 0">
